@@ -13,7 +13,7 @@ $(window).resize(function() { redraw(); });
 
 function setupAndDraw() {
 	var jsonData = $.ajax({
-		url : "/weight/api/weights",
+		url : "api/weights",
 		dataType : "json",
 		async : false
 	}).responseText;
