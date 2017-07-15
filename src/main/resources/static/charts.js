@@ -1,11 +1,7 @@
 google.charts.load('current', {'packages':['corechart', 'controls']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(setupAndDraw);
 
-var jsonData = $.ajax({
-	url : "/weight/api/weights",
-	dataType : "json",
-	async : false
-}).responseText;
+var dashboard, data;
 
 var series = {
 	0 : { color : '#0000aa' }, // weight
@@ -13,9 +9,17 @@ var series = {
 	2 : { color : '#bbbbbb' }  // bmi 30
 };
 
-$(window).resize(function() { drawChart(); });
+$(window).resize(function() { redraw(); });
 
-function drawChart() {
+function setupAndDraw() {
+	var jsonData = $.ajax({
+		url : "/weight/api/weights",
+		dataType : "json",
+		async : false
+	}).responseText;
+	
+	data = new google.visualization.DataTable(jsonData);
+	
 	var chart = new google.visualization.ChartWrapper({
 		chartType : 'google.charts.Line',
 		containerId : 'chart_div',
@@ -50,8 +54,12 @@ function drawChart() {
             }
         }
 	});
-
-	var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+	
+	dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 	dashboard.bind(control, chart);
-	dashboard.draw(new google.visualization.DataTable(jsonData));
+	dashboard.draw(data);
+}
+
+function redraw() {
+	dashboard.draw(data);
 }
