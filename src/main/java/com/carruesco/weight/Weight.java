@@ -4,42 +4,72 @@ import java.util.Date;
 
 public class Weight {
 
-    private final Date date;
-    private final double weight;
-    private final double height;
-    private final double bmi;
-    private final double weightFor30;
-    private final double weightFor25;
-    private final double weightFor18d5;
+    private Date date;
+    private Double weight;
+    private Double height;
+    private double bmi;
+    private double weightFor30;
+    private double weightFor25;
+    private double weightFor18d5;
     
     private double getWeightForBmi(double targetBmi) {
     	return height * height * targetBmi;
     }
+    
+    public Weight() {
+    	this(null, null, null);
+	}
 
-    public Weight(Date date, double weight, double height) {
+    public Weight(Date date, Double weight, Double height) {
         this.date = date;
         this.weight = weight;
         this.height = height;
-        this.bmi = weight / height / height;
-        this.weightFor30 = getWeightForBmi(30);
-        this.weightFor25 = getWeightForBmi(25);
-        this.weightFor18d5 = getWeightForBmi(18.5);
+        
+        if (weight != null && height != null) {
+        	this.bmi = weight / height / height;
+        	this.weightFor30 = getWeightForBmi(30);
+        	this.weightFor25 = getWeightForBmi(25);
+        	this.weightFor18d5 = getWeightForBmi(18.5);
+        } else {        	
+        	this.bmi = 0.0;
+        	this.weightFor30 = 0.0;
+        	this.weightFor25 = 0.0;
+        	this.weightFor18d5 = 0.0;
+        }
     }
+    
+    @Override
+    public String toString() {
+    	return String.format(
+                "Weight[date=%s, weight='%d', height='%d']",
+                date, weight, height);
+    }
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	public void setHeight(Double height) {
+		this.height = height;
+	}
 
 	public Date getDate() {
 		return date;
 	}
 
-	public double getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public double getHeight() {
+	public Double getHeight() {
 		return height;
 	}
 
 	public double getBmi() {
-//		return String.format("%.2f", bmi);
 		return bmi;
 	}
 

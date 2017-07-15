@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Sample</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#" th:action="@{/new}" th:object="${weightTO}" method="post">
+    	<p>Date: <input id="date" type="date" th:field="*{date}" /></p>
+        <p>Weight: <input id="weight" type="text" th:field="*{weight}" /></p>
+        <p>Height: <input id="height" type="text" th:field="*{height}" /></p>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</body>
+<script type="text/javascript">
+	Date.prototype.toDateInputValue = (function() {
+	    var local = new Date(this);
+	    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+	    return local.toISOString().slice(0,10);
+	});
+	
+	document.getElementById('date').value = new Date().toDateInputValue();
+</script>
+</html>
