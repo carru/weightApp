@@ -25,6 +25,13 @@ public class Weight {
         this.weightFor25 = getWeightForBmi(25);
         this.weightFor18d5 = getWeightForBmi(18.5);
     }
+    
+    @Override
+    public String toString() {
+    	return String.format(
+                "Weight[date=%s, weight='%d', height='%d']",
+                date, weight, height);
+    }
 
 	public Date getDate() {
 		return date;
