@@ -35,11 +35,13 @@ public class WeightApiController {
     
 //    @PostMapping("/api/weight")
     @RequestMapping("/api/weight")
-    public String addWeight(@RequestParam(value="date") String date, 
+    public String addWeight(@RequestParam(value="date", defaultValue="") String date, 
     		@RequestParam(value="weight") String weight, 
-    		@RequestParam(value="height") String height) {
+    		@RequestParam(value="height", defaultValue="") String height) {
     	
+    	if ("".equals(date)) date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     	if ("".equals(height)) height = getLastHeight();
+    	
     	String sql = "INSERT INTO weight.weights (date, weight, height)" + 
     				 " VALUES (?, ?, ?)" +
     				 " ON DUPLICATE KEY UPDATE weight = ?, height = ?;";
@@ -52,14 +54,6 @@ public class WeightApiController {
 		}
     	
     	return SUCCESS;
-    }
-    
-//    @PostMapping("/api/weightOnly")
-    @RequestMapping("/api/weightOnly")
-    public String addWeight(@RequestParam(value="weight") String weight) {
-		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    	String height = "";
-    	return addWeight(date, weight, height);
     }
     
     private String getLastHeight() {
