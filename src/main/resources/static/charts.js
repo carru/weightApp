@@ -5,8 +5,9 @@ var dashboard, data;
 
 var series = {
 	0 : { color : '#0000aa' }, // weight
-	1 : { color : '#bbbbbb' }, // bmi 25
-	2 : { color : '#bbbbbb' }  // bmi 30
+	1 : { color : '#bbbbbb' }, // bmi 18.5
+	2 : { color : '#bbbbbb' }, // bmi 25
+	3 : { color : '#bbbbbb' }  // bmi 30
 };
 
 $(window).resize(function() { redraw(); });

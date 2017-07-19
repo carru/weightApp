@@ -16,6 +16,7 @@ public class DataTablePojo {
     	cols = new ArrayList<Col>();
     	cols.add(new Col("date", "Date", "", "date"));
     	cols.add(new Col("weight", "Weight", "", "number"));
+    	cols.add(new Col("bmi18d5", "BMI 18.5", "", "number"));
     	cols.add(new Col("bmi25", "BMI 25", "", "number"));
     	cols.add(new Col("bmi30", "BMI 30", "", "number"));
     	
@@ -79,6 +80,7 @@ class Row {
 													  cal.get(Calendar.DAY_OF_MONTH)), 
 				new SimpleDateFormat("yyyy.MM.dd").format(weight.getDate())));
 		c.add(new C(weight.getWeight(), String.format("%.1f", weight.getWeight())));
+		c.add(new C(weight.getWeightFor18d5(), String.format("%.1f", weight.getWeightFor18d5())));
 		c.add(new C(weight.getWeightFor25(), String.format("%.1f", weight.getWeightFor25())));
 		c.add(new C(weight.getWeightFor30(), String.format("%.1f", weight.getWeightFor30())));
 	}
