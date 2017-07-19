@@ -8,6 +8,7 @@ public class Weight {
     private final double weight;
     private final double height;
     private final double bmi;
+    private final double weightFor35;
     private final double weightFor30;
     private final double weightFor25;
     private final double weightFor18d5;
@@ -21,6 +22,7 @@ public class Weight {
         this.weight = weight;
         this.height = height;
         this.bmi = weight / height / height;
+        this.weightFor35 = getWeightForBmi(35);
         this.weightFor30 = getWeightForBmi(30);
         this.weightFor25 = getWeightForBmi(25);
         this.weightFor18d5 = getWeightForBmi(18.5);
@@ -48,6 +50,10 @@ public class Weight {
 	public double getBmi() {
 //		return String.format("%.2f", bmi);
 		return bmi;
+	}
+
+	public double getWeightFor35() {
+		return weightFor35;
 	}
 
 	public double getWeightFor30() {
