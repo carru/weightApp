@@ -49,8 +49,7 @@ function setupAndDraw() {
 		},
         state: {
             range: {
-                start: new Date(2017, 4, 11),
-                end: new Date(2017, 11, 31)
+                start: new Date(2017, 4, 11)
             }
         }
 	});
