@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +25,7 @@ public class WeightApiController {
     	List<Weight> weights = new ArrayList<Weight>();
     	
     	jdbcTemplate.query(
-                "SELECT date, weight, height FROM weights", 
+                "SELECT date, weight, height FROM weights ORDER BY date ASC", 
                 new Object[] {  },
                 (rs, rowNum) -> new Weight(rs.getDate("date"), rs.getDouble("weight"), rs.getDouble("height"))
         ).forEach(weight -> weights.add(weight));
@@ -33,8 +33,7 @@ public class WeightApiController {
     	return new DataTablePojo(weights);
     }
     
-//    @PostMapping("/api/weight")
-    @RequestMapping("/api/weight")
+    @PostMapping("/api/weight")
     public String addWeight(@RequestParam(value="date", defaultValue="") String date, 
     		@RequestParam(value="weight") String weight, 
     		@RequestParam(value="height", defaultValue="") String height) {
