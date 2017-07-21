@@ -1,0 +1,30 @@
+<html>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<body>
+	<div id="form_div">
+	    <form id="form" action="api/weight" method="post">
+		    <p>Date: <input name="date" type="date"/></p>
+		    <p>Weight: <input name="weight" type="text" required="required"/></p>
+		    <p>Height: <input name="height" type="text"/></p>
+		    <p>
+		    	<input type="submit" value="Submit"/>
+		    	<button onclick="location.href='...';">Graph</button>
+		    </p>
+	    </form>
+	    <div id="result"></div>
+	</div>
+</body>
+<script type="text/javascript">
+	$('#form').submit(function() {
+	    $.ajax({
+	        data: $(this).serialize(),
+	        type: $(this).attr('method'),
+	        url: $(this).attr('action'),
+	        success: function(response) {
+	            $('#result').html(response);
+	        }
+	    });
+	    return false;
+	});
+</script>
+</html>
