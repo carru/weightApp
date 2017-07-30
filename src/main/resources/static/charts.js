@@ -26,13 +26,7 @@ function getTickValues(min, max, step) {
 }
 
 function setupAndDraw() {
-	var jsonData = $.ajax({
-		url : "api/weights",
-		dataType : "json",
-		async : false
-	}).responseText;
-	
-	data = new google.visualization.DataTable(jsonData);
+	var dashboard_div = document.getElementById('dashboard_div');
 	
 	var chart = new google.visualization.ChartWrapper({
 //		chartType: 'google.charts.Line',
@@ -75,9 +69,17 @@ function setupAndDraw() {
         }
 	});
 	
-	dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+	dashboard = new google.visualization.Dashboard(dashboard_div);
 	dashboard.bind(control, chart);
-	dashboard.draw(data);
+	
+	$.ajax({
+		url : "api/weights",
+		dataType : "json",
+        success: function(response) {
+        	data = new google.visualization.DataTable(response);
+        	redraw();
+        }
+	});
 }
 
 function redraw() {
