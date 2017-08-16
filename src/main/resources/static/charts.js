@@ -41,8 +41,8 @@ function setupAndDraw() {
             	viewWindow: { min: aMin, max: aMax },
             	ticks: getTickValues(aMin, aMax, tickStep),
             	minorGridlines: { count: tickStep - 1 }
-            },
-            trendlines: { 0: {type: 'polynomial', degree: 4, color: '#999999', opacity: 0.5} }
+            }
+            //trendlines: { 0: {type: 'polynomial', degree: 4, color: '#999999', opacity: 0.5} }
 		}
 	});
 
