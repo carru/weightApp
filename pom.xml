@@ -5,7 +5,7 @@
 
 	<groupId>com.carruesco</groupId>
 	<artifactId>weight</artifactId>
-	<version>0.0.4</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 
 	<name>weight</name>
@@ -65,7 +65,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://tomcat:8080/manager/text</url>
+					<url>http://192.168.0.98:8080/manager/text</url>
 					<server>TomcatServer</server>
 					<path>/weight</path>
 				</configuration>

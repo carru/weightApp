@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Settings</title>
+</head>
+<body>
+	<div id="form_div">
+		    <p>Y max: <input id="ymax" type="number" min="0" max="999.99" step="any" required="required"/></p>
+		    <p>Y min: <input id="ymin" type="number" min="0" max="999.99" step="any" required="required"/></p>
+		    <p>
+		    	<button onclick="setCookies()">Save</button>
+<!-- 		    	<button onclick="location.href='...';">Graph</button> -->
+		    </p>
+	</div>
+</body>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="Cookies.js"></script>
+<script type="text/javascript">
+	$(window).load(function(){
+		var ymax = Cookies.get('ymax');
+		var ymin = Cookies.get('ymin');
+		if (ymax == null) ymax = 100;
+		if (ymin == null) ymin = 70;
+		
+		document.getElementById("ymax").value = ymax;
+		document.getElementById("ymin").value = ymin;
+	})
+
+	function setCookies() {
+		var expiry = new Date(2099, 0, 1);
+		var path = "/";
+		
+		var ymax = document.getElementById("ymax").value;
+		var ymin = document.getElementById("ymin").value;
+		
+		Cookies.set('ymax', ymax, {expiry : expiry, path : path});
+		Cookies.set('ymin', ymin, {expiry : expiry, path : path});
+		
+		// Return to graph
+		location.href='...';
+	}
+</script>
+</html>

@@ -9,8 +9,10 @@ var series = {
 	3: { color: '#ffcc00', type: 'area', lineWidth: 0 }, // bmi 30
 	4: { color: '#cc0000', type: 'area', lineWidth: 0 }  // bmi 35
 };
-var aMax = 100;
-var aMin = 70;
+var ymax = parseInt(Cookies.get('ymax'));
+var ymin = parseInt(Cookies.get('ymin'));
+if (ymax == null) ymax = 100;
+if (ymin == null) ymin = 70;
 var tickStep = 5;
 
 $(window).resize(function() { redraw(); });
@@ -38,8 +40,8 @@ function setupAndDraw() {
 			theme: 'maximized',
             isStacked: true,
             vAxis: { 
-            	viewWindow: { min: aMin, max: aMax },
-            	ticks: getTickValues(aMin, aMax, tickStep),
+            	viewWindow: { min: ymin, max: ymax },
+            	ticks: getTickValues(ymin, ymax, tickStep),
             	minorGridlines: { count: tickStep - 1 }
             }
             //trendlines: { 0: {type: 'polynomial', degree: 4, color: '#999999', opacity: 0.5} }
@@ -58,7 +60,7 @@ function setupAndDraw() {
 					series: series,
                     chartArea: { width: '95%' },
                     isStacked: true,
-                    vAxis: { viewWindow: { min: aMin, max: aMax } }
+                    vAxis: { viewWindow: { min: ymin, max: ymax } }
 				}
 			}
 		},
